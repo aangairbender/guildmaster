@@ -1,6 +1,7 @@
 ﻿using Gameplay.Characters;
 using Gameplay.Furniture;
 using Gameplay.Items;
+using Gameplay.Terrain;
 using Gameplay.Trees;
 using System.Collections.ObjectModel;
 
