@@ -39,31 +39,31 @@ namespace Gameplay.Cameras
 
         void HandleMovementInput()
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            if (UnityEngine.Input.GetKey(KeyCode.W) || UnityEngine.Input.GetKey(KeyCode.UpArrow))
             {
                 newPosition += transform.forward * movementSpeed;
             }
-            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            if (UnityEngine.Input.GetKey(KeyCode.S) || UnityEngine.Input.GetKey(KeyCode.DownArrow))
             {
                 newPosition += transform.forward * -movementSpeed;
             }
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            if (UnityEngine.Input.GetKey(KeyCode.D) || UnityEngine.Input.GetKey(KeyCode.RightArrow))
             {
                 newPosition += transform.right * movementSpeed;
             }
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+            if (UnityEngine.Input.GetKey(KeyCode.A) || UnityEngine.Input.GetKey(KeyCode.LeftArrow))
             {
                 newPosition += transform.right * -movementSpeed;
             }
-            if (Input.GetKey(KeyCode.Q))
+            if (UnityEngine.Input.GetKey(KeyCode.Q))
             {
                 newRotation *= Quaternion.Euler(Vector3.up * rotationAmount);
             }
-            if (Input.GetKey(KeyCode.E))
+            if (UnityEngine.Input.GetKey(KeyCode.E))
             {
                 newRotation *= Quaternion.Euler(Vector3.up * -rotationAmount);
             }
-            newZoom += zoomAmount * Input.mouseScrollDelta.y;
+            newZoom += zoomAmount * UnityEngine.Input.mouseScrollDelta.y;
         }
     }
 }

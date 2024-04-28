@@ -1,17 +1,21 @@
 ﻿using Gameplay.Gathering.Data;
-using Unity.Entities;
+using UnityEngine;
 
 namespace Gameplay.Gathering.Components
 {
-    public struct GatheringNode : IComponentData
+    public class GatheringNode : MonoBehaviour
     {
-        public ResourceData Resource;
-        public int Amount;
+        [field: SerializeField]
+        public GatheringNodeConfig Config { get; private set; }
 
-        public GatheringNode(ResourceData resource, int amount)
+        [field: SerializeField]
+        public int AmountLeft { get; private set; }
+
+        void Start()
         {
-            Resource = resource;
-            Amount = amount;
+            Debug.Assert(Config != null);
+            AmountLeft = Config.InitialAmount;
         }
     }
 }
+    

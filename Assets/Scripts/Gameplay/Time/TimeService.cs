@@ -1,18 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Gameplay.Time
 {
     public interface ITimeService
     {
-        float DeltaTime { get; }
+        event Action<float> Tick;
     }
 
-    public class TimeService : ITimeService
+    public class TimeService : MonoBehaviour, ITimeService
     {
-        public float DeltaTime => UnityEngine.Time.deltaTime;
+        public event Action<float> Tick;
+
+        private void Update()
+        {
+            Tick?.Invoke(UnityEngine.Time.deltaTime);
+        }
     }
 }

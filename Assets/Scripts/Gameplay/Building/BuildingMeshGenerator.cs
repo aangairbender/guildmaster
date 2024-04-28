@@ -299,7 +299,7 @@ namespace Gameplay.Building
                 try
                 {
                     target = degree.First(w => w.Value <= 1).Key;
-                } catch (Exception _)
+                } catch (Exception)
                 {
                     break;
                 }

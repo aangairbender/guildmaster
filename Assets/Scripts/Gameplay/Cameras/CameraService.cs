@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+﻿using UnityEngine;
 
 namespace Gameplay.Cameras
 {
-    public class CameraService : MonoBehaviour
+    public interface ICameraService
+    {
+        bool RaycastMousePosition(LayerMask layerMask, out RaycastHit hit);
+    }
+
+    public class CameraService : MonoBehaviour, ICameraService
     {
         [SerializeField] Camera mainCamera;
 
         // TODO: cache results per layerMask, clean cache in the beginning of each update
         public bool RaycastMousePosition(LayerMask layerMask, out RaycastHit hit)
         {
-            var mousePos = Input.mousePosition;
+            var mousePos = UnityEngine.Input.mousePosition;
             mousePos.z = mainCamera.nearClipPlane;
             var ray = mainCamera.ScreenPointToRay(mousePos);
             return Physics.Raycast(ray, out hit, mainCamera.farClipPlane, layerMask);

@@ -10,7 +10,6 @@ namespace Gameplay.Building
         [SerializeField] UnityEngine.Camera sceneCamera;
         [SerializeField] LayerMask placementLayerMask;
         [SerializeField] GameObject markerPrefab;
-        [SerializeField] float markerLerpSpeed = 0.1f;
         [SerializeField] private GameObject draftWallsObject;
         [SerializeField] private GameObject wallsObject;
         [SerializeField] private GameObject gridObject;
@@ -44,7 +43,7 @@ namespace Gameplay.Building
             marker.SetActive(inBuilding);
             draftWallsObject.SetActive(inBuilding);
 
-            if (Input.GetKeyDown(KeyCode.B))
+            if (UnityEngine.Input.GetKeyDown(KeyCode.B))
             {
                 if (inBuilding) ResetDraft();
 
@@ -61,21 +60,21 @@ namespace Gameplay.Building
             var node = NodeOf(snapped);
             MoveMarkerTo(node);
 
-            if (Input.GetMouseButtonDown(0))
+            if (UnityEngine.Input.GetMouseButtonDown(0))
             {
                 srcNode = node;
                 inDraft = true;
                 // marker.SetActive(false);
             }
 
-            if (Input.GetMouseButtonUp(0))
+            if (UnityEngine.Input.GetMouseButtonUp(0))
             {
                 wallsOutdated = true;
                 foreach (var wall in draftWalls) walls.Add(wall);
                 ResetDraft();
             }
 
-            if (Input.GetMouseButtonDown(1) && inDraft)
+            if (UnityEngine.Input.GetMouseButtonDown(1) && inDraft)
             {
                 ResetDraft();
             }
@@ -120,7 +119,7 @@ namespace Gameplay.Building
 
         private Vector3 GetSelectedMapPosition()
         {
-            var mousePos = Input.mousePosition;
+            var mousePos = UnityEngine.Input.mousePosition;
             mousePos.z = sceneCamera.nearClipPlane;
             var ray = sceneCamera.ScreenPointToRay(mousePos);
             if (Physics.Raycast(ray, out var hit, 100, placementLayerMask))

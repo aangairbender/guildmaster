@@ -1,9 +1,9 @@
 using Gameplay;
 using Gameplay.Cameras;
 using Gameplay.Characters;
+using Gameplay.Input;
+using Gameplay.Shipment;
 using Gameplay.Time;
-using Gameplay.Trees;
-using MessagePipe;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -12,26 +12,31 @@ namespace DI
 {
     public class GameLifetimeScope : LifetimeScope
     {
-        [SerializeField] CameraService cameraService;
+        [SerializeField] GameConfig gameConfig;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            var options = builder.RegisterMessagePipe();
-            builder.RegisterBuildCallback(c => GlobalMessagePipe.SetProvider(c.AsServiceProvider()));
-            // builder.RegisterMessageBroker<CharacterCreated>(options);
+            builder.RegisterInstance(gameConfig);
 
-            builder.Register<ITimeService, TimeService>(Lifetime.Singleton);
-            builder.RegisterComponent(cameraService);
+            // Unity services
+            builder.UseComponents(components =>
+            {
+                components.AddInHierarchy<TimeService>().AsImplementedInterfaces();
+                components.AddInHierarchy<InputService>().AsImplementedInterfaces();
+                components.AddInHierarchy<CameraService>().AsImplementedInterfaces();
+            });
 
-            var gameWorld = new GameWorld();
-            GameWorld.Default = gameWorld;
+            // Gameplay modrls
+            builder.Register<ICharacterModel, CharacterModel>(Lifetime.Singleton);
+            builder.Register<ICargoModel, CargoModel>(Lifetime.Singleton);
 
-            builder.RegisterInstance(gameWorld);
-
-            builder.RegisterComponentInHierarchy<GamePresenter>();
-            builder.RegisterComponentInHierarchy<GameController>();
-            builder.RegisterComponentInHierarchy<TreeSpawnerOnClick>();
-            builder.RegisterComponentInHierarchy<CharacterUI>();
+            // Controllers
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<Gameplay.Characters.CharacterController>();
+                entryPoints.Add<CargoController>();
+                entryPoints.Add<GamePresenter>();
+            });
         }
     }
 }

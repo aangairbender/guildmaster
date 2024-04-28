@@ -36,7 +36,7 @@ namespace Gameplay.Building
         {
             bool rebuildRequired = false;
 
-            if (Input.GetMouseButtonDown(2))
+            if (UnityEngine.Input.GetMouseButtonDown(2))
             {
                 rebuildRequired = true;
             }

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6693c2b5c5f1359408e77b65581008be, type: 3}
+  m_Name: DefaultGameConfig
+  m_EditorClassIdentifier: 
+  TreePrefab: {fileID: 6941765000743290380, guid: 93baa1b5d63c109448efc856a4730797,
+    type: 3}
+  CharacterPrefab: {fileID: 9084056183608708474, guid: e465729653f6ff445adcd6689490ede4,
+    type: 3}
+  ChestPrefab: {fileID: 3929323426889150044, guid: 21435df80498f564b9bd875b2a670995,
+    type: 3}
+  DroppedItemPrefab: {fileID: 7170027987601944953, guid: 0138590e44b4d634a89228c902e7cdb0,
+    type: 3}
